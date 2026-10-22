@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Добавление товара</title>
+    <style>
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; margin: 30px; background-color: #f7f9fc; }
+        .container { max-width: 600px; margin: auto; background: white; padding: 25px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.08); }
+        h1 { color: #333; margin-top: 0; }
+        .form-group { margin-bottom: 18px; }
+        label { display: block; margin-bottom: 6px; font-weight: 500; color: #374151; }
+        input[type="text"], input[type="number"], textarea {
+            width: 100%; box-sizing: border-box; padding: 10px; border: 1px solid #cbd5e1; border-radius: 4px; font-size: 14px;
+        }
+        input:focus, textarea:focus { outline: none; border-color: #2563eb; ring: 2px solid #93c5fd; }
+        textarea { resize: vertical; min-height: 80px; }
+        .actions { display: flex; gap: 10px; margin-top: 20px; }
+        .btn-submit { background-color: #16a34a; color: white; border: none; padding: 10px 20px; border-radius: 4px; cursor: pointer; font-size: 15px; font-weight: 500; }
+        .btn-submit:hover { background-color: #15803d; }
+        .btn-cancel { background-color: #94a3b8; color: white; text-decoration: none; padding: 10px 20px; border-radius: 4px; font-size: 15px; font-weight: 500; display: inline-block; }
+        .btn-cancel:hover { background-color: #64748b; }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>Добавить новый товар</h1>
+    <form th:action="@{/products/add}" th:object="${product}" method="post">
+        <div class="form-group">
+            <label for="name">Название товара:</label>
+            <input type="text" id="name" th:field="*{name}" required placeholder="Например, Смартфон" />
+        </div>
+
+        <div class="form-group">
+            <label for="price">Цена (руб.):</label>
+            <input type="number" step="0.01" min="0" id="price" th:field="*{price}" required placeholder="0.00" />
+        </div>
+
+        <div class="form-group">
+            <label for="description">Описание товара:</label>
+            <textarea id="description" th:field="*{description}" placeholder="Краткое описание товара"></textarea>
+        </div>
+
+        <div class="actions">
+            <button type="submit" class="btn-submit">Сохранить</button>
+            <a th:href="@{/products}" class="btn-cancel">Отмена</a>
+        </div>
+    </form>
+</div>
+</body>
+</html>
